@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <td>총점</td>
+        <td>평균 점수</td>
+    </tr>
+    <tr th:object="${taskVO}">
+        <td th:text="*{kor} + *{eng}+ *{math}"></td>
+        <td th:text="(*{kor} + *{eng}+ *{math})/3"></td>
+    </tr>
+</table>
+</body>
+</html>

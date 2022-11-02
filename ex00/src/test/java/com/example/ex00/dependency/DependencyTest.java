@@ -5,18 +5,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-@Slf4j // log 출력 되게 하는
+@SpringBootTest @Slf4j
 public class DependencyTest {
-    @Autowired // 주입 해줘
+    @Autowired
     private Coding coding;
 
     @Autowired
     private Restaurant restaurant;
 
-    @Test // 이 메소드를 단위테스트로 돌려라
+    @Test
     public void dependencyTest(){
-        log.info(coding+"");
-        log.info(restaurant+"");
+        log.info(coding + "");
+        log.info(restaurant + "");
     }
 }

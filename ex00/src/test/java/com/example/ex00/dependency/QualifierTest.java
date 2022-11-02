@@ -21,12 +21,11 @@ public class QualifierTest {
     @Autowired
     private Restaurant outback;
 
-    @Autowired
-    @Qualifier("vips")
+    @Autowired @Qualifier("vips")
     private Restaurant vips;
 
     @Test
-    public void qualifierTest() {
+    public void qualifierTest(){
 //        log.info(desktop + "");
 //        log.info(laptop + "");
 //        log.info(computer + "");
