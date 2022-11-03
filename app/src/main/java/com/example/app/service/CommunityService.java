@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service @Qualifier("community") @Primary
+@Service
+@Qualifier("community")
+@Primary
 @RequiredArgsConstructor
-public class CommunityService implements BoardService{
+public class CommunityService implements BoardService {
     private final BoardDAO boardDAO;
 
     @Override
