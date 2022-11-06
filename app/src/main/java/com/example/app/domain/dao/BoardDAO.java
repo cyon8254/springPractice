@@ -11,29 +11,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardDAO {
     private final BoardMapper boardMapper;
-
     //    게시글 목록
-    public List<BoardVO> findAll() {
+    public List<BoardVO> findAll(){
         return boardMapper.getList();
     }
-
     //    게시글 조회
-    public BoardVO findById(Long boardNumber) {
+    public BoardVO findById(Long boardNumber){
         return boardMapper.select(boardNumber);
     }
-
     //    게시글 추가
-    public int save(BoardVO boardVO) {
+    public int save(BoardVO boardVO){
         return boardMapper.insert(boardVO);
     }
-
     //    게시글 수정
-    public int setBoard(BoardVO boardVO) {
+    public int setBoard(BoardVO boardVO){
         return boardMapper.update(boardVO);
     }
-
     //    게시글 삭제
-    public int deleteById(Long boardNumber) {
+    public int deleteById(Long boardNumber){
         return boardMapper.delete(boardNumber);
     }
 }

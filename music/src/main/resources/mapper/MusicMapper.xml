@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.music.mapper.MusicMapper">
+    <select id="getList" resultType="musicVO">
+        SELECT MUSIC_NUMBER, MUSIC_TITLE, MUSIC_SINGER, MUSIC_LYRICS, MUSIC_REGISTER_DATE, MUSIC_UPDATE_DATE
+        FROM TBL_MUSIC
+    </select>
+
+    <select id="select" resultType="musicVO">
+        SELECT MUSIC_NUMBER, MUSIC_TITLE, MUSIC_SINGER, MUSIC_LYRICS, MUSIC_REGISTER_DATE, MUSIC_UPDATE_DATE
+        FROM TBL_MUSIC
+        WHERE MUSIC_NUMBER=#{musicNumber}
+    </select>
+
+    <insert id="insert">
+        <selectKey keyProperty="musicNumber" order="BEFORE" resultType="long">
+            SELECT SEQ_MUSIC.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO ADMIN.TBL_MUSIC
+        (MUSIC_NUMBER, MUSIC_TITLE, MUSIC_SINGER, MUSIC_LYRICS)
+        VALUES(#{musicNumber}, #{musicTitle}, #{musicSinger}, #{musicLyrics})
+    </insert>
+
+    <update id="update">
+        UPDATE TBL_MUSIC
+        SET MUSIC_TITLE=#{musicTitle}, MUSIC_SINGER=#{musicSinger}, MUSIC_LYRICS=#{musicLyrics},  MUSIC_UPDATE_DATE=CURRENT_DATE
+        WHERE MUSIC_NUMBER=#{musicNumber}
+    </update>
+    
+    <delete id="delete">
+        DELETE FROM TBL_MUSIC
+        WHERE MUSIC_NUMBER=#{musicNumber}
+    </delete>
+</mapper>
