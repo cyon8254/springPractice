@@ -15,5 +15,5 @@ public class BoardVO {
     private String boardRegisterDate;
     private String boardUpdateDate;
 
-    public List<FileVO> files;
+    private List<FileVO> files;
 }

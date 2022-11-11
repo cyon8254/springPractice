@@ -47,8 +47,8 @@ public class BoardDAOTest {
         boardDAO.deleteById(boardNumber);
     }
 
-    @Test
-    public void selectCountOfBoard(){
-        log.info("board count: " + boardDAO.findCount());
-    }
+//    @Test
+//    public void selectCountOfBoard(){
+//        log.info("board count: " + boardDAO.findCount());
+//    }
 }

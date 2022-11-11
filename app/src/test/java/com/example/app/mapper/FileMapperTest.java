@@ -19,21 +19,22 @@ public class FileMapperTest {
         fileVO.setFileSize(30L);
         fileVO.setFileUploadPath("test");
         fileVO.setFileUuid("abc111");
-        fileVO.setBoardNumber(41L);
+        fileVO.setBoardNumber(265L);
 
         fileMapper.insert(fileVO);
     }
 
     @Test
     public void selectTest(){
-        fileMapper.select(41L).stream().map(FileVO::toString).forEach(log::info);
+        fileMapper.select(265L).stream().map(FileVO::toString).forEach(log::info);
     }
 
     @Test
     public void deleteTest(){
-        fileMapper.delete(41L);
+        fileMapper.delete(265L);
     }
 }
+
 
 
 
