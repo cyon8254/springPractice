@@ -1,10 +1,10 @@
 package com.example.intermediate.repository;
 
 import com.example.intermediate.entity.Desktop;
-import com.example.intermediate.entity.Developer;
 import com.example.intermediate.entity.Phone;
-import com.example.intermediate.entity.Planner;
+import com.example.intermediate.type.Hardware;
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
 @Slf4j
@@ -22,25 +22,32 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ComputerRepositoryTest {
     @Autowired
     private DesktopRepository desktopRepository;
+
     @Autowired
     private PhoneRepository phoneRepository;
 
     @Test
-    public void saveTest() {
+    public void saveTest(){
         Desktop desktop = new Desktop();
         Phone phone = new Phone();
+        Hardware hardware = new Hardware();
 
-        desktop.create("UHD", "자작", "카리나", 5000000L, LocalDateTime.now(), "32GB", "1TB", "GeForce RTX 4090 24GB", "i9-13900K", LocalDateTime.now(), LocalDateTime.now(), "한글");
-        phone.create("FHD", "SAMSUNG", "오연서", 1500000L, LocalDateTime.now(), "8GB", "512GB", "퀄컴 Adreno 730 900MHz", "Qualcomm Kryo Prime MP1 3.18GHz + Qualcomm Kryo Gold MP3 2.7GHz + Qualcomm Kryo Silver MP4 2GHz", LocalDateTime.now(), LocalDateTime.now(), "3,700mAh");
+        hardware.create(8, 512, "RTX3050", "Intel");
 
-        desktopRepository.save(desktop);
+        phone.create(640, "애플", "프로 14", 2_000_000, LocalDateTime.now(), hardware, 900);
+        desktop.create(1980, "삼성", "갤럭시북", 2_000_000, LocalDateTime.now(), hardware, "적축");
+
         phoneRepository.save(phone);
-
+        desktopRepository.save(desktop);
     }
 
+    @Test
+    public void updateTest(){
+//        assertThat(desktopRepository.findById(1l).get().getComputerBrand()).isEqualTo("삼성");
+//        desktopRepository.findById(2L).get().setComputerBrand("LG");
+        phoneRepository.findById(1L).get().setComputerBrand("삼성");
+    }
 }
-
-
 
 
 

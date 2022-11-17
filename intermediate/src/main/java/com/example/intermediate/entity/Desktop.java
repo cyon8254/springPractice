@@ -1,5 +1,6 @@
 package com.example.intermediate.entity;
 
+import com.example.intermediate.type.Hardware;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,22 +10,42 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.awt.*;
 import java.time.LocalDateTime;
 
 @Entity
-@DiscriminatorValue("DESKTOP")
+@DiscriminatorValue("Desktop")
 @Table(name = "TBL_DESKTOP")
-@Getter
-@Setter
-@ToString
+@Getter @Setter @ToString
 @NoArgsConstructor
-public class Desktop extends Computer {
-    @Column(name = "DESKTOP_KEYBOARD")
-    private String desktop_keyboard;
+public class Desktop extends Computer{
+    private String deskTopKeyboardType;
 
-    public void create(String computerScreen, String computer_brand, String computerName, Long computerPrice, LocalDateTime computerReleaseDate, String computerRam, String computerSsd, String computerGpu, String computerProcessor, LocalDateTime computerCreatedDate, LocalDateTime computerUpdatedDate, String desktop_keyboard) {
-        super.create(computerScreen, computer_brand, computerName, computerPrice, computerReleaseDate, computerRam, computerSsd, computerGpu, computerProcessor, computerCreatedDate, computerUpdatedDate);
-        this.desktop_keyboard = desktop_keyboard;
+    public void create(int computerScreen, String computerBrand, String computerName, int computerPrice, LocalDateTime computerReleaseDate, Hardware hardware, String deskTopKeyboardType) {
+        super.create(computerScreen, computerBrand, computerName, computerPrice, computerReleaseDate, hardware);
+        this.deskTopKeyboardType = deskTopKeyboardType;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
