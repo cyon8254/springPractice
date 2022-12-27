@@ -1,7 +1,8 @@
 package com.example.ex00.dependency;
 
-import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 //@AllArgsConstructor
 @RequiredArgsConstructor
 public class Coding {
-//    필드 주입
+    //    필드 주입
 //    굉장히 편하게 주입할 수 있으나 순환 참조(무한 루프)시 오류가 발생하지 않기 때문에 StackOverFlow 발생
 //    final을 붙일 수 없기 때문에 다른 곳에서 변형 가능
 //    @Autowired
@@ -28,19 +29,3 @@ public class Coding {
 //        this.computer = computer;
 //    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

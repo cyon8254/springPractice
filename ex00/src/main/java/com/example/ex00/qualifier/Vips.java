@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 @ToString
-public class Vips implements Restaurant{
+public class Vips implements Restaurant {
     private int steakPrice = Restaurant.steakPrice - 10000;
 
     @Override

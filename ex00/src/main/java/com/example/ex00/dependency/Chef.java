@@ -9,4 +9,5 @@ import org.springframework.stereotype.Component;
 @Getter
 @ToString
 @RequiredArgsConstructor
-public class Chef {}
+public class Chef {
+}

@@ -1,6 +1,8 @@
 package com.example.ex02.controller;
 
+import com.example.ex02.domain.vo.LoginVO;
 import com.example.ex02.domain.vo.MemberVO;
+import com.example.ex02.domain.vo.ProductVO;
 import com.example.ex02.domain.vo.TaskVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -8,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.util.Calendar;
 
 @Controller
 @Slf4j
@@ -16,7 +18,7 @@ import java.util.List;
 public class ExampleController {
 
     @RequestMapping(value = "ex01", method = {RequestMethod.GET, RequestMethod.POST})
-    public void ex01() {
+    public void ex01(Model model) {
         log.info("ex01...........");
     }
 
@@ -53,17 +55,18 @@ public class ExampleController {
         log.info("gender: " + gender);
     }
 
-    @GetMapping("ex08")
-    public void ex08(@RequestParam("data") List<String> datas) {
-        log.info(datas.toString());
-    }
-
-    @GetMapping("ex09")
-
-
-//    [실습 1]
+    //    [실습 1]
 //    외부에서 상품명, 상품가격, 상품재고, 브랜드 전달받아서 화면에 전송
 //    화면에서 4개 정보 입력 후 form태그로 전송한다.
+    @GetMapping("product")
+    public String product() {
+        return "product/product";
+    }
+
+    @PostMapping("product")
+    public String product(ProductVO productVO) {
+        return "product/result";
+    }
 
     //    [실습 2]
 //    TaskVO 선언
@@ -75,10 +78,9 @@ public class ExampleController {
     }
 
     @PostMapping("/exam")
-    public String exam(TaskVO taskVO, Model model) {
+    public String exam(TaskVO taskVO) {
         return "exam/result";
     }
-
 
 //    [실습 3]
 //    아이디와 비밀번호를 입력받은 후 아이디가 admin일 경우 admin.html로 이동
@@ -87,6 +89,16 @@ public class ExampleController {
 //    - login.html : 아이디와 비밀번호 입력 페이지 출력
 //    - admin.html : 관리자 페이지 출력
 //    - user.html : 일반 회원 페이지 출력
+
+    @GetMapping("/login")
+    public String login() {
+        return "login/login";
+    }
+
+    @PostMapping("/login")
+    public String login(LoginVO loginVO) {
+        return "login/" + (loginVO.getId().equals("admin") ? "admin" : "user");
+    }
 
 //    [실습 4]
 //    이름을 입력하고 출근 또는 퇴근 버튼을 클릭한다.
@@ -97,8 +109,42 @@ public class ExampleController {
 //    - leaveWork.html
 //    - late.html
 //    - work.html
-}
 
+    @GetMapping("checkIn")
+    public String checkIn() {
+        return "checkIn/checkIn";
+    }
+
+    @GetMapping("getToWork")
+    public String getToWork(@ModelAttribute("name") String name) {
+        Calendar now = Calendar.getInstance();
+        int hour = now.get(Calendar.HOUR_OF_DAY);
+        int minute = now.get(Calendar.MINUTE);
+
+        boolean lateCondition1 = hour > 9 && minute >= 0;
+        boolean lateCondition2 = hour == 9 && minute > 0;
+
+        if (lateCondition1 || lateCondition2) {
+            return "checkIn/late";
+        }
+        return "checkIn/getToWork";
+    }
+
+    @GetMapping("leaveWork")
+    public String leaveWork(@ModelAttribute("name") String name) {
+        Calendar now = Calendar.getInstance();
+        int hour = now.get(Calendar.HOUR_OF_DAY);
+        int minute = now.get(Calendar.MINUTE);
+
+        boolean leaveWorkCondition = hour >= 17 && minute >= 0;
+
+        if (leaveWorkCondition) {
+            return "checkIn/leaveWork";
+        }
+        return "checkIn/work";
+    }
+
+}
 
 
 

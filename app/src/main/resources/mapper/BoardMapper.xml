@@ -28,20 +28,20 @@
         SELECT BOARD_NUMBER, BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT, BOARD_REGISTER_DATE, BOARD_UPDATE_DATE
         FROM
         (
-            SELECT ROWNUM R, BOARD_NUMBER, BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT, BOARD_REGISTER_DATE, BOARD_UPDATE_DATE
-            FROM
-            (
-                SELECT BOARD_NUMBER, BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT, BOARD_REGISTER_DATE, BOARD_UPDATE_DATE
-                FROM TBL_BOARD
-                ORDER BY BOARD_NUMBER DESC
-            )
-            WHERE
-            <trim prefixOverrides="AND">
-                <include refid="search"/>
-                <![CDATA[
+        SELECT ROWNUM R, BOARD_NUMBER, BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT, BOARD_REGISTER_DATE, BOARD_UPDATE_DATE
+        FROM
+        (
+        SELECT BOARD_NUMBER, BOARD_TITLE, BOARD_WRITER, BOARD_CONTENT, BOARD_REGISTER_DATE, BOARD_UPDATE_DATE
+        FROM TBL_BOARD
+        ORDER BY BOARD_NUMBER DESC
+        )
+        WHERE
+        <trim prefixOverrides="AND">
+            <include refid="search"/>
+            <![CDATA[
                 AND ROWNUM <= #{page} * #{amount}
                 ]]>
-            </trim>
+        </trim>
         )
         <![CDATA[
         WHERE R > (#{page} - 1) * #{amount}

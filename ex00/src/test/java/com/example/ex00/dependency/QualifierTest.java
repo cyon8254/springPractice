@@ -1,6 +1,5 @@
 package com.example.ex00.dependency;
 
-import com.example.ex00.qualifier.Computer;
 import com.example.ex00.qualifier.Restaurant;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -21,11 +20,12 @@ public class QualifierTest {
     @Autowired
     private Restaurant outback;
 
-    @Autowired @Qualifier("vips")
+    @Autowired
+    @Qualifier("vips")
     private Restaurant vips;
 
     @Test
-    public void qualifierTest(){
+    public void qualifierTest() {
 //        log.info(desktop + "");
 //        log.info(laptop + "");
 //        log.info(computer + "");
