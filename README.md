@@ -238,10 +238,14 @@ RDB를 객체방식으로 설계하면,
 	각 객체에 담아준 뒤, flower.setPot(pot) 형태와 같이 복잡하게 작업해야 한다.
 
 	하지만 만약 자바 컬렉션으로 관리가 가능하다면,
-
+	
+	<br>
 	list.add(flower);
+	<br>
 	Flower flower = list.get(flowerId);
+	<br>
 	Pot pot = flower.getPot();
+	<br>
 
 	훨씬 편하게 작업이 가능하다.
 
@@ -260,9 +264,11 @@ RDB를 객체방식으로 설계하면,
 		Delivery	
 
 	객체는 모든 객체 그래프를 탐색할 수 있어야 한다.
-
+	<br>
 	market.getFlower();
+	<br>
 	flower.getPot();
+	<br>
 	...
 
 	하지만 SQL 작성 시 이미 탐색 범위가 결정된다.
@@ -272,19 +278,28 @@ RDB를 객체방식으로 설계하면,
 	market.getPot()는 null일 수 밖에 없다.
 
 	따라서 엔티티에 대한 신뢰가 무너질 수 밖에 없다.
-	
+	<br>
 	Market market = marketDAO.find(marketId);
+	<br>
 	market.getFlower(); // null이 아니라고 확신할 수 없다.
+	<br>
 	market.getOrder().getClient(); // null이 아니라고 확실할 수 없다.
+	<br>
 
 	marketDAO에 있는 find()를 분석해보지 않는 이상 각 엔티티에 대해 신뢰할 수 없다.
+	<br>
 
 	따라서 상황에 따라 조회에 대한 메소드를 여러 개 선언해놓아야 한다.
+	<br>
 	
 	marketDAO.getFlower();
+	<br>
 	marketDAO.getMemberWithFlower();
+	<br>
 	marketDAO.getMemberWithOrderWithClient();
+	<br>
 	...
+	<br>
 
 	하지만 위와 같은 방법은 사실상 불가능에 가깝다.
 
