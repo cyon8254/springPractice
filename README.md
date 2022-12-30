@@ -238,7 +238,7 @@ Handler Mapping 또는 Controller 에 전달을 한다.
 	[사원]
 
 	번호
-	--------
+	
 	이름
 	생년월일
 	경력
