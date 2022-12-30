@@ -1,4 +1,4 @@
-# springractice
+# springPractice
 
 
 # 프레임워크
