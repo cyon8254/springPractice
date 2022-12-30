@@ -239,13 +239,13 @@ RDB를 객체방식으로 설계하면,
 
 	하지만 만약 자바 컬렉션으로 관리가 가능하다면,
 	
-	<br>
+
 	list.add(flower);
-	<br>
+
 	Flower flower = list.get(flowerId);
-	<br>
+
 	Pot pot = flower.getPot();
-	<br>
+
 
 	훨씬 편하게 작업이 가능하다.
 
@@ -302,33 +302,53 @@ RDB를 객체방식으로 설계하면,
 	<br>
 
 	하지만 위와 같은 방법은 사실상 불가능에 가깝다.
+	<br>
 
 
 4. 값 비교
+<br>
 	SQL 실행 결과를 담은 뒤 생성자를 호출하여 객체에 담으면 매번 new가 사용되기 때문에
+	<br>
 	동일한 조회 결과의 객체일지라도 주소가 모두 다르다.
+	<br>
 
 	하지만 만약 자바 컬렉션에서 객체 조회가 가능하다면
+	<br>
 	list.get(memberId) == list.get(memberId)
+	<br>
 	같은 객체를 가져오기 때문에 주소가 같다.
+	<br>
 
+<br>
 즉, 객체지향으로 설계할 수록 작업이 오히려 복잡해지고 늘어나기 때문에 RDB 중심으로 설계할 수 밖에 없다.
+<br>
 RDB를 자바 컬렉션에 저장하듯 사용하면 굉장히 편해지고 많은 문제가 해결되는데,
+<br>
 바로 이 기술을 JPA(Java Persistence API)라고 한다.
+<br>
 
 
 # JPA를 사용해야 하는 이유
 	1. SQL 중심 개발에서 객체 중심으로 개발
+	<br>
 
 	2. 생산성
+
 		저장 : jpa.persist(market);
+
 		조회 : jpa.find(marketId);
+
 		수정 : market.setMarketName("새로운 이름");
+
 		삭제 : jpa.remove(market);
 
+
 	3. 유지보수
+	<br>
 		클라이언트가 새로운 필드를 요청하여 새로운 필드 추가 시
+		<br>
 		클래스 안에 필드만 한 개 추가하면 끝. SQL문을 수정할 필요 없음.
+		<br>
 
 	4. 패러다임의 불일치 해결
 
@@ -387,14 +407,22 @@ RDB를 자바 컬렉션에 저장하듯 사용하면 굉장히 편해지고 많�
 			   │
 			   │
 			Delivery
+			<br>
 	
 			Flower flower = jpa.find(Flower.class, flowerId);
+			<br>
 			Pot pot = flower.getPot();
+			<br>
+			<br>
 
 			marketDAO.find(marketId);
+			<br>
 			market.getFlower();
+			<br>
 			market.getOrder().getClient();
+			<br>
 
+<br>
 			※ SELECT 결과가 없으면 문제가 생기기 때문에 NPE 체크는 반드시 해야 한다.
 
 		▶ JPA와 값 비교
