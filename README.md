@@ -221,49 +221,6 @@ Handler Mapping 또는 Controller 에 전달을 한다.
 # 객체와 관계형 데이터베이스의 차이
 
 1. 상속
-	※ OA: 사무 자동화(엑셀, 한글, 워드, ppt 등)
-
-	[개발자]	[기획자]<br>
-<br>
-	번호		번호<br>
-	
-	이름		이름<br>
-	생년월일	생년월일<br>
-	경력		경력<br>
-	기술등급	OA등급<br>
-	프로젝트 수	클라이언트 수<br>
-
-	●●●●●●●●●●●● 또는 ●●●●●●●●●●●●
-
-	[사원]<br>
-<br>
-	번호<br>
-	<br>
-	이름<br>
-	생년월일<br>
-	경력<br>
-	기술등급<br>
-	프로젝트 수<br>
-	OA등급<br>
-	클라이언트 수<br>
-
-	▷ 슈퍼 - 서브 타입 도출<br>
-<br>
-	[사원] - 슈퍼<br>
-<br>
-	번호(PK)<br>
-	<br>
-	이름<br><br>
-	생년월일<br>
-	경력<br>
-
-	[개발자] - 서브		[기획자] - 서브<br>
-<br>
-	번호(PK, FK)		번호(PK, FK)<br>
-	<br>
-	기술등급		OA등급<br>
-	프로젝트 수		클라이언트 수<br>
-
 
 	1:1 관계에서 INSERT를 하기 위해서는 쿼리를 2번 작성해야하는 불편함이 생긴다.
 	게다가 조회를 할 때에는 JOIN을 사용해야 하는데 쿼리가 굉장히 복잡해진다.
@@ -275,44 +232,8 @@ Handler Mapping 또는 Controller 에 전달을 한다.
 
 2. 연관관계
 	객체는 하위 연산자(.)를 사용하여 참조를 한다.
-	
-	▶ 객체 연관 관계: 단방향으로 흘러간다(Flower에서 Pot 접근은 가능하지만 Pot에서 Flower를 접근할 수 없다)
 
-	Flower 	→ 	Pot
-	
-	id		id
-	name		shape
-	Pot pot		color
-
-
-	▶ RDB 연관 관계: 양방향으로 흘러간다(FLOWER에서 POT을, POT에서 FLOWER를 접근할 수 있다)
-
-	FLOWER	↔	POT
-
-	FLOWER_ID(PK)	POT_ID(PK)
-	
-	FLOWER_NAME	POT_SHAPE
-	POT_ID(FK)	POT_COLOR
-
-	
-	▶ 객체를 테이블에 맞추어 설계
-
-	Class Flower{
-		String flowerId;
-		String flowerName;
-		String potId; // FK는 RDB방식에서의 연관관계이기 때문에 객체방식으로 바꿔야 함.
-	}
-
-
-	▶ 테이블을 객체에 맞추어 설계
-
-	Class Flower{
-		String flowerId;
-		String flowerName;
-		Pot pot; // 참조로 연관관계를 맺도록 함.
-	}
-
-	위와 같이 RDB를 객체방식으로 설계하면,
+RDB를 객체방식으로 설계하면,
 	조회 시 JOIN을 하여 FLOWER와 POT에서 각각 필요한 정보를 가져와
 	각 객체에 담아준 뒤, flower.setPot(pot) 형태와 같이 복잡하게 작업해야 한다.
 
